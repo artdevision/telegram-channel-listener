@@ -1,0 +1,30 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+require __DIR__.'/vendor/autoload.php';
+
+use Artdevision\TelegramChannelListener\EventListener\ExceptionListener;
+use Artdevision\TelegramChannelListener\Facade\AppFacade;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Console\ConsoleEvents;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Artdevision\TelegramChannelListener\Application;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+
+$container = new ContainerBuilder();
+
+(new YamlFileLoader($container, new FileLocator(__DIR__. '/config')))
+    ->load('services.yml');
+
+$container->compile();
+AppFacade::init($container);
+
+$eventDispatcher = new EventDispatcher();
+$eventDispatcher->addListener(ConsoleEvents::ERROR, [new ExceptionListener(), 'onConsoleException']);
+
+/** @var Application $app */
+$app = $container
+    ->get(Application::class);
+$app->setDispatcher($eventDispatcher);
+$app->run();
