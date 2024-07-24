@@ -6,7 +6,7 @@ framework:
     transports:
       async:
         dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
-        serializer: Artdevision\TelegramChannelListener\Messenger\JsonMessageSerializer
+        serializer: Artdevision\TelegramChannelListener\Messenger\JsonIncomingMessageSerializer
         retry_strategy:
           max_retries: 3
           # milliseconds delay
