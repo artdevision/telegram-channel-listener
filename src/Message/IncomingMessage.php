@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace Artdevision\TelegramChannelListener\Message;
 
-class IncomingMessage
+final class IncomingMessage
 {
-    private array $message;
-    private array $chatInfo;
-
-    public function __construct(array $message, array $chatInfo)
-    {
+    public function __construct(
+        private array $message,
+        private array $chatInfo
+    ) {
     }
 
     public function getMessage(): array

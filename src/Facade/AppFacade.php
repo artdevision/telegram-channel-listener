@@ -6,7 +6,7 @@ namespace Artdevision\TelegramChannelListener\Facade;
 use Psr\Container\ContainerInterface;
 use RuntimeException;
 
-class AppFacade
+final class AppFacade
 {
     private static ?self $instance = null;
     private static ?ContainerInterface $container = null;

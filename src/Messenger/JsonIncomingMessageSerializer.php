@@ -9,7 +9,7 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Stamp\StampInterface;
 use Symfony\Component\Messenger\Transport\Serialization\SerializerInterface;
 
-class JsonIncomingMessageSerializer implements SerializerInterface
+final class JsonIncomingMessageSerializer implements SerializerInterface
 {
     /**
      * @throws JsonException
@@ -53,5 +53,7 @@ class JsonIncomingMessageSerializer implements SerializerInterface
                 ]
             ];
         }
+
+        return [];
     }
 }
