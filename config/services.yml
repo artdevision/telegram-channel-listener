@@ -1,0 +1,27 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  Artdevision\TelegramChannelListener\:
+    resource: '../src/*'
+    exclude: '../src/{DependencyInjection,Entity,ExceptionListener,Tests,Application.php}'
+
+  Symfony\Component\Filesystem\Filesystem:
+    class: Symfony\Component\Filesystem\Filesystem
+
+  Artdevision\TelegramChannelListener\Application:
+    public: true
+    arguments:
+      $commands: !tagged_iterator app.commands
+      $name: 'tg-listener'
+      $version: '1.0.0'
+
+  messenger:
+    public: true
+    class: Symfony\Component\Messenger\MessageBus
+
+  danog\MadelineProto\API:
+    class: danog\MadelineProto\API
+    factory: '@Artdevision\TelegramChannelListener\Client\ApiClientFactory'

@@ -1,0 +1,7 @@
+vendor
+session.tg-listener
+.idea
+
+.env
+MadelineProto.log
+composer.lock
