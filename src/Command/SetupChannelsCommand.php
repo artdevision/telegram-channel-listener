@@ -15,11 +15,9 @@ use Symfony\Component\Yaml\Yaml;
 final class SetupChannelsCommand extends Command
 {
     protected const CONFIG_FILE = __DIR__ . '/../../config/channels.yml';
-    protected Filesystem $filesystem;
 
-    public function __construct(Filesystem $filesystem, ?string $name = null)
+    public function __construct(protected Filesystem $filesystem, ?string $name = null)
     {
-        $this->filesystem = $filesystem;
         parent::__construct($name);
     }
 

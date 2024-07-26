@@ -12,9 +12,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('app.commands')]
 final class StartCommand extends Command
 {
-    protected ApiClientFactory $clientFactory;
-
-    public function __construct(ApiClientFactory $clientFactory, string $name = null)
+    public function __construct(protected ApiClientFactory $clientFactory, string $name = null)
     {
         $this->clientFactory = $clientFactory;
         parent::__construct($name);
